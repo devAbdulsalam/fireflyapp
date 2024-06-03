@@ -1,4 +1,11 @@
-import { View, Text, TouchableOpacity, Alert } from 'react-native';
+import {
+	View,
+	Text,
+	ImageBackground,
+	Alert,
+	StyleSheet,
+	Image,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { INTRO_SCREEN_01 } from '@/constants/Screens';
@@ -65,19 +72,33 @@ const IntroScreen01 = () => {
 				<Loader />
 			) : (
 				<SafeAreaView style={{ backgroundColor: theme.colors.card, flex: 1 }}>
+					{/* <ImageBackground
+						source={require('@/assets/images/firemen.jpg')}
+						resizeMode="contain"
+						style={styles.image}
+					> */}
 					<Animated.View
 						entering={FadeInUp.duration(1000).springify()}
-						style={{ alignItems: 'center', flex: 1, justifyContent: 'center' }}
+						style={{
+							alignItems: 'center',
+							flex: 1,
+							justifyContent: 'center',
+						}}
 					>
-						<Home width={300} height={300} />
+						<Image
+							source={require('@/assets/images/logo.jpg')}
+							style={{ width: 240, height: 240 }}
+							resizeMode="cover"
+						/>
+						{/* <Home width={300} height={300} /> */}
 					</Animated.View>
-					<View style={{ padding: 24 }}>
+					<View style={{ padding: 24, backgroundColor: 'white' }}>
 						<Animated.Text
 							entering={FadeInDown.duration(1000).springify()}
 							style={{
 								fontSize: 40,
 								fontWeight: '800',
-								color: theme.colors.text,
+								color: '#e25822',
 							}}
 						>
 							{INTRO_SCREEN_01.title}
@@ -108,6 +129,7 @@ const IntroScreen01 = () => {
 							/>
 						</Animated.View>
 					</View>
+					{/* </ImageBackground> */}
 				</SafeAreaView>
 			)}
 		</>
@@ -115,3 +137,10 @@ const IntroScreen01 = () => {
 };
 
 export default IntroScreen01;
+
+const styles = StyleSheet.create({
+	image: {
+		flex: 1,
+		justifyContent: 'center',
+	},
+});

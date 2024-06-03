@@ -95,7 +95,8 @@ const LoginScreen = () => {
 
 			setIsLoading(false);
 		} catch (error) {
-			console.warn('Error', '@post forgot password', error?.message);
+			console.warn('Error', '@post login', error);
+			console.warn('Error', '@post login password', error?.message);
 			// const message = error?.data || 'Something went wrong!';
 			Alert.alert('Error sigining up', 'Something went wrong', [
 				{
@@ -148,7 +149,7 @@ const LoginScreen = () => {
 									<Icons
 										name="arrow-back-ios"
 										size={24}
-										color={theme.colors.text}
+										color={COLORS.secondary}
 									/>
 								</TouchableOpacity>
 							</Animated.View>
@@ -171,7 +172,7 @@ const LoginScreen = () => {
 								style={{
 									fontSize: 40,
 									fontWeight: '800',
-									color: theme.colors.text,
+									color: COLORS.secondary,
 								}}
 							>
 								{LOG_IN_SCREEN.title}

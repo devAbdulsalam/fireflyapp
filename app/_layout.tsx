@@ -45,6 +45,8 @@ export default function RootLayout() {
 						<Stack.Screen name="index3" options={{ headerShown: false }} />
 						<Stack.Screen name="(app)" options={{ headerShown: false }} />
 						<Stack.Screen name="(auth)" options={{ headerShown: false }} />
+						<Stack.Screen name="games" options={{ headerShown: false }} />
+						{/* <Stack.Screen name="features" options={{ headerShown: false }} /> */}
 						<Stack.Screen name="+not-found" />
 					</Stack>
 				</QueryClientProvider>

@@ -6,7 +6,7 @@ import {
 	Pressable,
 	TextInput,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/context/authContext';
 import { useTheme } from '@react-navigation/native';
 import PrimaryButton from '@/components/PrimaryButton';
@@ -17,14 +17,24 @@ import Colors, { COLORS } from '@/constants/Colors';
 const EmailModal = ({ handlePress, isModal, setIsModal }) => {
 	const theme = useTheme();
 	const { profile } = useAuth();
+	const [username, setUserName] = useState(profile.username);
 	const [email, setEmail] = useState(profile.email);
+	const [phone, setPhone] = useState(profile.phone);
+
+	useEffect(() => {
+		if (phone.length <= 14) {
+			setPhone(phone);
+		} else {
+			setPhone(phone.substring(0, 14));
+		}
+	}, [phone]);
 
 	const updateEmail = () => {
 		if (!email) {
 			return;
 		}
 		setIsModal(false);
-		const option = { ...profile, email };
+		const option = { username, phone, email };
 		handlePress(option);
 	};
 
@@ -37,7 +47,40 @@ const EmailModal = ({ handlePress, isModal, setIsModal }) => {
 		>
 			<View style={styles.content}>
 				<View style={styles.card}>
-					<Text style={styles.title}>Change Email</Text>
+					<Text style={styles.title}>Update Profile</Text>
+					<Text>Phone</Text>
+					<Animated.View
+						entering={FadeInDown.delay(200).duration(1000).springify()}
+						style={{ position: 'relative', width: '100%' }}
+					>
+						<TextInput
+							placeholder="Your username"
+							style={{
+								fontSize: 16,
+								fontWeight: '500',
+								color: theme.colors.text,
+								paddingLeft: 48,
+								paddingRight: 12,
+								height: 48,
+								borderRadius: 12,
+								backgroundColor: theme.colors.background,
+								width: '100%',
+							}}
+							value={username}
+							onChangeText={setUserName}
+						/>
+						<Icons
+							name="person"
+							size={24}
+							color={theme.colors.text}
+							style={{
+								position: 'absolute',
+								left: 12,
+								top: 12,
+								// opacity: 0.5,
+							}}
+						/>
+					</Animated.View>
 					<Text>Email</Text>
 					<Animated.View
 						entering={FadeInDown.delay(200).duration(1000).springify()}
@@ -61,6 +104,40 @@ const EmailModal = ({ handlePress, isModal, setIsModal }) => {
 						/>
 						<Icons
 							name="email"
+							size={24}
+							color={theme.colors.text}
+							style={{
+								position: 'absolute',
+								left: 12,
+								top: 12,
+								// opacity: 0.5,
+							}}
+						/>
+					</Animated.View>
+					<Text>Phone</Text>
+					<Animated.View
+						entering={FadeInDown.delay(200).duration(1000).springify()}
+						style={{ position: 'relative', width: '100%' }}
+					>
+						<TextInput
+							placeholder="Your phone"
+							style={{
+								fontSize: 16,
+								fontWeight: '500',
+								color: theme.colors.text,
+								paddingLeft: 48,
+								paddingRight: 12,
+								height: 48,
+								borderRadius: 12,
+								backgroundColor: theme.colors.background,
+								width: '100%',
+							}}
+							keyboardType="numeric"
+							value={phone}
+							onChangeText={setPhone}
+						/>
+						<Icons
+							name="phone"
 							size={24}
 							color={theme.colors.text}
 							style={{

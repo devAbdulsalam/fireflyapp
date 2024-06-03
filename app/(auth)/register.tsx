@@ -32,7 +32,7 @@ const RegisterScreen = () => {
 	const theme = useTheme();
 	const [userName, onChangeUserName] = useState('');
 	const [email, onChangeEmail] = useState('');
-	const [phone, setPhone] = useState('+234');
+	const [phone, setPhone] = useState('');
 	const [password, onChangePassword] = useState('');
 	const [cPassword, onChangeCPassword] = useState('');
 	const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -48,12 +48,18 @@ const RegisterScreen = () => {
 	// 	onChangePassword('');
 	// 	onChangeCPassword('');
 	// };
-
-	const onChangePhone = async (text) => {
+	const onChangePhone = async (text: string) => {
 		const phoneNumber = await addCountryCode(text);
-		setPhone(phoneNumber);
-		return;
+		if (phoneNumber.length <= 14) {
+			return setPhone(() => phoneNumber);
+		} else {
+			return setPhone(() => phoneNumber.substring(0, 14));
+		}
 	};
+	useEffect(() => {
+		onChangePhone(phone);
+		console.log('phone is chan', phone);
+	}, [phone]);
 
 	const handleSignup = async () => {
 		setIsError('');
@@ -63,9 +69,12 @@ const RegisterScreen = () => {
 		if (!email) {
 			return setIsError('Email is required!');
 		}
-		if (!phone || phone.length < 14) {
+		if (!phone || phone.length != 14) {
 			return setIsError('Please enter a valid 14-digit number!');
 		}
+		// if (phone.length > 14) {
+		// 	return setIsError('Please enter a valid 14-digit number!');
+		// }
 		if (!password) {
 			return setIsError('Password is required!');
 		}
@@ -134,11 +143,11 @@ const RegisterScreen = () => {
 								flexDirection: 'row',
 							}}
 						>
-							<TouchableOpacity onPress={() => router.replace('/(auth)login')}>
+							<TouchableOpacity onPress={() => router.replace('/(auth)/login')}>
 								<Icons
 									name="arrow-back-ios"
 									size={24}
-									color={theme.colors.text}
+									color={COLORS.secondary}
 								/>
 							</TouchableOpacity>
 						</Animated.View>
@@ -151,7 +160,12 @@ const RegisterScreen = () => {
 								justifyContent: 'center',
 							}}
 						>
-							<Artwork03 width={240} height={240} />
+							<Image
+								source={require('@/assets/images/logo.jpg')}
+								style={{ width: 240, height: 240 }}
+								resizeMode="cover"
+							/>
+							{/* <Artwork03 width={240} height={240} /> */}
 						</Animated.View>
 
 						<View style={{ padding: 24 }}>
@@ -160,7 +174,7 @@ const RegisterScreen = () => {
 								style={{
 									fontSize: 40,
 									fontWeight: '800',
-									color: theme.colors.text,
+									color: COLORS.secondary,
 								}}
 							>
 								{REGISTER_SCREEN.title}
@@ -197,6 +211,7 @@ const RegisterScreen = () => {
 										}}
 										value={userName}
 										onChangeText={onChangeUserName}
+										keyboardType="default"
 									/>
 									<Icons
 										name="person"
@@ -229,6 +244,7 @@ const RegisterScreen = () => {
 										}}
 										value={email}
 										onChangeText={onChangeEmail}
+										keyboardType="email-address"
 									/>
 									<Icons
 										name="email"
@@ -268,7 +284,8 @@ const RegisterScreen = () => {
 									</View>
 									<TextInput
 										placeholder="Enter phone number"
-										onChangeText={onChangePhone}
+										value={phone}
+										onChangeText={(text) => onChangePhone(text)}
 										defaultValue="+234"
 										style={{
 											fontSize: 16,

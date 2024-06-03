@@ -1,3 +1,7 @@
+import { COLORS } from './Colors';
+import icons from './Icons';
+import Images from './Images';
+
 export const safetyTips = [
 	{
 		category: 'At Home',
@@ -93,5 +97,75 @@ export const safetyTips = [
 					'Once you are safely outside, call 911 or your local emergency number. Never go back inside a burning building.',
 			},
 		],
+	},
+];
+
+export const featuresData = [
+	{
+		id: 3,
+		icon: icons.internet,
+		color: COLORS.primary,
+		backgroundColor: COLORS.lightGreen,
+		description: 'About',
+		link: '/(app)/about',
+	},
+	{
+		id: 1,
+		icon: icons.video,
+		color: COLORS.red,
+		backgroundColor: COLORS.lightRed,
+		description: 'Report',
+		link: '(app)/explore',
+	},
+	{
+		id: 5,
+		icon: icons.bill,
+		color: COLORS.yellow,
+		backgroundColor: COLORS.lightyellow,
+		description: 'Tips',
+		link: '(app)/tips',
+	},
+	{
+		id: 6,
+		icon: icons.game,
+		color: COLORS.primary,
+		backgroundColor: COLORS.lightGreen,
+		description: 'Games',
+		link: '/games',
+	},
+	{
+		id: 2,
+		icon: icons.info,
+		color: COLORS.purple,
+		backgroundColor: COLORS.lightRed,
+		description: 'Report',
+		link: '(app)/explore',
+	},
+];
+
+export const gallery = [
+	{
+		id: 1,
+		img: Images.firemen,
+		title: 'Fire men',
+		description: 'Fire men putting out fire',
+	},
+	{
+		id: 2,
+		img: Images.firetruck,
+		title: 'Fire truck',
+		description: 'Fire men putting out fire',
+	},
+	{
+		id: 3,
+		img: Images.firetruck2,
+		title: 'Fire truck',
+		description: 'Fire men putting out fire',
+	},
+	{
+		id: 4,
+		img: Images.firetruck3,
+		title: 'Fire fighters on a truck',
+		description: 'Ambulance',
 	},
 ];

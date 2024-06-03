@@ -9,6 +9,7 @@ import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 import Artwork02 from '@/components/artworks/Artwork02';
 import { router } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { COLORS } from '@/constants/Colors';
 
 const IntroScreen03 = () => {
 	const theme = useTheme();
@@ -38,7 +39,7 @@ const IntroScreen03 = () => {
 				}}
 			>
 				<TouchableOpacity onPress={() => router.navigate('/index2')}>
-					<Icons name="arrow-back-ios" size={24} color={theme.colors.text} />
+					<Icons name="arrow-back-ios" size={24} color={COLORS.secondary} />
 				</TouchableOpacity>
 			</Animated.View>
 			<Animated.View
@@ -50,7 +51,7 @@ const IntroScreen03 = () => {
 			<View style={{ padding: 24 }}>
 				<Animated.Text
 					entering={FadeInDown.duration(1000).springify()}
-					style={{ fontSize: 40, fontWeight: '800', color: theme.colors.text }}
+					style={{ fontSize: 40, fontWeight: '800', color: COLORS.secondary }}
 				>
 					{INTRO_SCREEN_03.title}
 				</Animated.Text>

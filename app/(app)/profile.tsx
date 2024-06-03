@@ -20,21 +20,22 @@ import PhoneModal from '@/components/modals/PhoneModal';
 import PasswordModal from '@/components/modals/PasswordModal';
 import { useState } from 'react';
 import axios from 'axios';
+import { COLORS } from '@/constants/Colors';
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
 export default function TabTwoScreen() {
 	const { profile, setProfile, setSesion, token, setToken } = useAuth();
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const [isEmalModal, setIsEmailModal] = useState<boolean>(false);
+	const [isProfileModal, setIsProfileModal] = useState<boolean>(false);
 	const [isPhoneModal, setIsPhoneModal] = useState<boolean>(false);
 	const [isPasswordModal, setIsPasswordModal] = useState<boolean>(false);
-	const handlePhone = () => {
-		console.log('open phone modal');
-		setIsPhoneModal(true);
-	};
-	const handleEmail = () => {
-		setIsEmailModal(true);
-		console.log('open email modal');
+	// const handleHowTo = () => {
+	// 	console.log('open phone modal');
+	// 	setIsPhoneModal(true);
+	// };
+	const handleProfile = () => {
+		setIsProfileModal(true);
+		console.log('open profile modal');
 	};
 
 	const handlePassword = () => {
@@ -132,7 +133,9 @@ export default function TabTwoScreen() {
 							style={styles.image}
 						/>
 						<ThemedText type="defaultSemiBold">{profile?.username}</ThemedText>
-						<ThemedText >{profile?.role}</ThemedText>
+						<ThemedText style={{ color: COLORS.secondary, paddingTop: 5 }}>
+							{profile?.role}
+						</ThemedText>
 					</ThemedView>
 
 					<ThemedView
@@ -143,40 +146,52 @@ export default function TabTwoScreen() {
 							backgroundColor: 'transparent',
 						}}
 					>
-						<ThemedText type="defaultSemiBold">Edit Profile</ThemedText>
+						<ThemedText
+							type="defaultSemiBold"
+							style={{ color: COLORS.secondary, paddingTop: 5 }}
+						>
+							Profile Settings
+						</ThemedText>
 
-						<ThemedView style={styles.card}>
-							<ThemedView>
-								<ThemedText type="defaultSemiBold">Phone</ThemedText>
-								<ThemedText>{profile?.phone}</ThemedText>
+						<Pressable
+							onPress={() => router.navigate('/about')}
+							// style={styles.card}
+						>
+							<ThemedView style={styles.card}>
+								<ThemedView>
+									<ThemedText type="defaultSemiBold">
+										How to Use Firefly
+									</ThemedText>
+									<ThemedText>How to use firefly</ThemedText>
+								</ThemedView>
+								<FontAwesome5 name="chevron-right" size={18} />
 							</ThemedView>
-							<Pressable onPress={handlePhone}>
-								<FontAwesome5 name="pen" size={24} />
-							</Pressable>
-						</ThemedView>
-						<ThemedView style={styles.card}>
-							<ThemedView>
-								<ThemedText type="defaultSemiBold">Email</ThemedText>
-								<ThemedText>{profile?.email}</ThemedText>
+						</Pressable>
+						<Pressable onPress={handleProfile}>
+							<ThemedView style={styles.card}>
+								<ThemedView>
+									<ThemedText type="defaultSemiBold">Update Profile</ThemedText>
+									<ThemedText>Edit profile information</ThemedText>
+								</ThemedView>
+								<FontAwesome5 name="pen" size={18} />
 							</ThemedView>
-							<Pressable onPress={handleEmail}>
-								<FontAwesome5 name="pen" size={24} />
-							</Pressable>
-						</ThemedView>
-						<ThemedView style={styles.card}>
-							<ThemedView>
-								<ThemedText type="defaultSemiBold">Password</ThemedText>
-								<ThemedText>*****</ThemedText>
+						</Pressable>
+						<Pressable onPress={handlePassword}>
+							<ThemedView style={styles.card}>
+								<ThemedView>
+									<ThemedText type="defaultSemiBold">
+										Change Password
+									</ThemedText>
+									<ThemedText>*****</ThemedText>
+								</ThemedView>
+								<FontAwesome5 name="pen" size={18} />
 							</ThemedView>
-							<Pressable onPress={handlePassword}>
-								<FontAwesome5 name="pen" size={24} />
-							</Pressable>
-						</ThemedView>
+						</Pressable>
 						<Pressable
 							onPress={handleLogout}
 							style={{
 								justifyContent: 'center',
-								backgroundColor: 'white',
+								backgroundColor: COLORS.lightRed,
 								flexDirection: 'row',
 								padding: 15,
 								borderRadius: 10,
@@ -187,18 +202,11 @@ export default function TabTwoScreen() {
 					</ThemedView>
 				</ScrollView>
 			)}
-			{isEmalModal && (
+			{isProfileModal && (
 				<EmailModal
 					handlePress={updateUser}
-					setIsModal={setIsEmailModal}
-					isModal={isEmalModal}
-				/>
-			)}
-			{isPhoneModal && (
-				<PhoneModal
-					handlePress={updateUser}
-					setIsModal={setIsPhoneModal}
-					isModal={isPhoneModal}
+					setIsModal={setIsProfileModal}
+					isModal={isProfileModal}
 				/>
 			)}
 			{isPasswordModal && (
@@ -223,13 +231,15 @@ const styles = StyleSheet.create({
 		width: 90,
 		height: 90,
 		borderRadius: 45,
+		borderColor: COLORS.secondary,
+		borderWidth: 1,
 	},
 	card: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		borderColor: 'gary',
-		borderRadius: 8,
+		borderRadius: 5,
 		padding: 8,
 	},
 });

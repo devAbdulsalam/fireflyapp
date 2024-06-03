@@ -1,5 +1,11 @@
 import React from 'react';
-import { View, SafeAreaView, TouchableOpacity, StatusBar } from 'react-native';
+import {
+	View,
+	SafeAreaView,
+	TouchableOpacity,
+	StatusBar,
+	Image,
+} from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import PrimaryButton from '@/components/PrimaryButton';
 import ScreenIndicators from '@/components/ScreenIndicators';
@@ -8,6 +14,7 @@ import Icons from '@expo/vector-icons/MaterialIcons';
 import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 import Artwork02 from '@/components/artworks/Artwork02';
 import { router } from 'expo-router';
+import { COLORS } from '@/constants/Colors';
 
 const IntroScreen02 = () => {
 	const theme = useTheme();
@@ -29,19 +36,24 @@ const IntroScreen02 = () => {
 				}}
 			>
 				<TouchableOpacity onPress={() => router.navigate('/')}>
-					<Icons name="arrow-back-ios" size={24} color={theme.colors.text} />
+					<Icons name="arrow-back-ios" size={24} color={COLORS.secondary} />
 				</TouchableOpacity>
 			</Animated.View>
 			<Animated.View
 				entering={FadeInUp.delay(200).duration(1000).springify()}
 				style={{ alignItems: 'center', flex: 1, justifyContent: 'center' }}
 			>
-				<Artwork02 width={300} height={300} />
+				<Image
+					source={require('@/assets/images/firetruck3.jpg')}
+					style={{ width: 240, height: 240, borderRadius: 10 }}
+					resizeMode="cover"
+				/>
+				{/* <Artwork02 width={300} height={300} color="#e25822" /> */}
 			</Animated.View>
 			<View style={{ padding: 24 }}>
 				<Animated.Text
 					entering={FadeInDown.duration(1000).springify()}
-					style={{ fontSize: 40, fontWeight: '800', color: theme.colors.text }}
+					style={{ fontSize: 40, fontWeight: '800', color: COLORS.secondary }}
 				>
 					{INTRO_SCREEN_02.title}
 				</Animated.Text>

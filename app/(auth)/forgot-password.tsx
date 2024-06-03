@@ -16,7 +16,7 @@ import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '@react-navigation/native';
 import Icons from '@expo/vector-icons/MaterialIcons';
-import Artwork03 from '@/components/artworks/Artwork03';
+import Artwork03 from '@/components/artworks/Artwork01';
 import { FORGOT_PASSWORD_SCREEN } from '@/constants/Screens';
 import PrimaryButton from '@/components/PrimaryButton';
 import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
@@ -112,7 +112,7 @@ const ForgotPasswordScreen = () => {
 								<Icons
 									name="arrow-back-ios"
 									size={24}
-									color={theme.colors.text}
+									color={COLORS.secondary}
 								/>
 							</TouchableOpacity>
 						</Animated.View>
@@ -134,7 +134,7 @@ const ForgotPasswordScreen = () => {
 								style={{
 									fontSize: 36,
 									fontWeight: '800',
-									color: theme.colors.text,
+									color: COLORS.secondary,
 								}}
 							>
 								{FORGOT_PASSWORD_SCREEN.title}
@@ -196,7 +196,7 @@ const ForgotPasswordScreen = () => {
 								<Link href={`/(auth)/login`} asChild>
 									<Text
 										style={{
-											color: COLORS.primary,
+											color: Colors.light.tint,
 											fontWeight: 'bold',
 											textAlign: 'center',
 											marginBottom: 14,
