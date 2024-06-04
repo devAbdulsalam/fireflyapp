@@ -110,9 +110,9 @@ export default function App() {
 		try {
 			setIsLoading(true);
 			const description = `longitude:${location?.coords?.longitude} and latitude:${location?.coords?.latitude}`;
-			const geolocation = `longitude:${location?.coords?.longitude} and latitude:${location?.coords?.latitude}`;
-			const option = { geolocation, image, address, description };
-			console.log(option);
+			const latitude = location?.coords?.latitude;
+			const longitude = location?.coords?.longitude;
+			const option = { latitude, longitude, image, address, description };
 			const { data } = await axios.post(`${apiUrl}/reports`, option, {
 				headers: {
 					Authorization: `Bearer ${token}`,
@@ -120,6 +120,7 @@ export default function App() {
 			});
 			if (data) {
 				Alert.alert('Report sent', 'Incident reported successfully');
+				setImage(null);
 				router.replace('/(app)');
 			}
 		} catch (error) {

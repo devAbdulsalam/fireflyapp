@@ -4,7 +4,6 @@ import {
 	TextInput,
 	KeyboardAvoidingView,
 	useWindowDimensions,
-	ActivityIndicator,
 	Alert,
 	StyleSheet,
 	StatusBar,
@@ -22,8 +21,9 @@ import PrimaryButton from '@/components/PrimaryButton';
 import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 import { Link, router } from 'expo-router';
 import Colors, { COLORS } from '@/constants/Colors';
-import { FontAwesome } from '@expo/vector-icons';
+// import { FontAwesome } from '@expo/vector-icons';
 import axios from 'axios';
+import Loader from '@/components/Loader';
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
 const ForgotPasswordScreen = () => {
@@ -78,9 +78,7 @@ const ForgotPasswordScreen = () => {
 	return (
 		<>
 			{isLoading ? (
-				<View style={[styles.container, styles.horizontal]}>
-					<ActivityIndicator size="large" color={COLORS.lime} />
-				</View>
+				<Loader />
 			) : (
 				<KeyboardAvoidingView
 					behavior={Platform.OS === 'ios' ? 'padding' : 'height'}

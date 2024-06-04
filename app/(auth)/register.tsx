@@ -4,7 +4,6 @@ import {
 	TextInput,
 	KeyboardAvoidingView,
 	useWindowDimensions,
-	ActivityIndicator,
 	Alert,
 	StyleSheet,
 	StatusBar,
@@ -26,6 +25,7 @@ import Colors, { COLORS } from '@/constants/Colors';
 import { addCountryCode } from '@/utils/addCountryCode';
 import { FontAwesome } from '@expo/vector-icons';
 import axios from 'axios';
+import Loader from '@/components/Loader';
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
 const RegisterScreen = () => {
@@ -118,9 +118,7 @@ const RegisterScreen = () => {
 	return (
 		<>
 			{isLoading ? (
-				<View style={[styles.container, styles.horizontal]}>
-					<ActivityIndicator size="large" color={COLORS.lime} />
-				</View>
+				<Loader />
 			) : (
 				<KeyboardAvoidingView
 					behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -274,7 +272,7 @@ const RegisterScreen = () => {
 									>
 										<Image
 											// source={flag}
-											source={require('@/assets/images/ng_flag.png')}
+											source={require('@/assets/images/flag.png')}
 											resizeMode="contain"
 											style={{
 												width: 30,

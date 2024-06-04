@@ -4,18 +4,18 @@ import {
 	TextInput,
 	KeyboardAvoidingView,
 	useWindowDimensions,
-	ActivityIndicator,
 	Alert,
 	StyleSheet,
 	StatusBar,
 	Text,
+	Image,
 	Platform,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 // import { RootStackScreenProps } from '../navigators/RootNavigator';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '@react-navigation/native';
-import Artwork03 from '@/components/artworks/Artwork03';
+// import Artwork03 from '@/components/artworks/Artwork03';
 import { LOG_IN_SCREEN } from '@/constants/Screens';
 import PrimaryButton from '@/components/PrimaryButton';
 import Icons from '@expo/vector-icons/MaterialIcons';
@@ -26,6 +26,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { useAuth } from '@/context/authContext';
+import Loader from '@/components/Loader';
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
 const LoginScreen = () => {
@@ -119,9 +120,7 @@ const LoginScreen = () => {
 	return (
 		<>
 			{isLoading ? (
-				<View style={[styles.container, styles.horizontal]}>
-					<ActivityIndicator size="large" color={COLORS.lime} />
-				</View>
+				<Loader />
 			) : (
 				<KeyboardAvoidingView
 					behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -163,7 +162,11 @@ const LoginScreen = () => {
 								justifyContent: 'center',
 							}}
 						>
-							<Artwork03 width={240} height={240} />
+							<Image
+								source={require('@/assets/images/logo.jpg')}
+								style={{ width: 240, height: 240 }}
+								resizeMode="cover"
+							/>
 						</Animated.View>
 
 						<View style={{ padding: 24 }}>

@@ -100,10 +100,11 @@ export default function TabTwoScreen() {
 		await AsyncStorage.removeItem('accessToken');
 		await AsyncStorage.removeItem('userInfo');
 		await AsyncStorage.removeItem('refreshToken');
+		await AsyncStorage.removeItem('isOnboarded');
 		setToken(null);
 		setSesion(null);
 		setProfile(null);
-		router.replace('/(auth)/login');
+		router.navigate('/');
 	};
 	const handleLogout = () => {
 		Alert.alert('Are you sure?', 'You will be logout', [

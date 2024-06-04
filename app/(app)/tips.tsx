@@ -1,7 +1,7 @@
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { StyleSheet, Image } from 'react-native';
-import { Collapsible } from '@/components/Collapsible';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
+// import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { StyleSheet, Image, SafeAreaView, ScrollView } from 'react-native';
+// import { Collapsible } from '@/components/Collapsible';
+// import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import SafetyTipsList from '@/components/SafetyTipsList';
@@ -9,33 +9,38 @@ import { COLORS } from '@/constants/Colors';
 
 export default function TabTwoScreen() {
 	return (
-		<ParallaxScrollView
-			headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-			headerImage={
-				<Image
-					source={require('@/assets/images/firetruck.jpg')}
-					style={styles.reactLogo}
-					resizeMode="cover"
-				/>
-			}
+		<SafeAreaView
+		// headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
 		>
-			<ThemedView style={styles.titleContainer}>
-				<ThemedText
-					type="title"
-					style={{ color: COLORS.secondary, paddingTop: 5 }}
-				>
-					Tips and safaty
+			<ScrollView style={{ width: '100%' }}>
+				<ThemedView style={styles.container}>
+					<Image
+						source={require('@/assets/images/firetruck.jpg')}
+						style={styles.reactLogo}
+						resizeMode="cover"
+					/>
+				</ThemedView>
+				<ThemedView style={styles.titleContainer}>
+					<ThemedText
+						type="title"
+						style={{ color: COLORS.secondary, paddingTop: 5 }}
+					>
+						Tips and safaty
+					</ThemedText>
+				</ThemedView>
+				<ThemedText style={{  padding: 15 }}>
+					Browse essential fire safety tips to protect your home and family.
 				</ThemedText>
-			</ThemedView>
-			<ThemedText>
-				Browse essential fire safety tips to protect your home and family.
-			</ThemedText>
-			<SafetyTipsList />
-		</ParallaxScrollView>
+				<SafetyTipsList />
+			</ScrollView>
+		</SafeAreaView>
 	);
 }
 
 const styles = StyleSheet.create({
+	container: {
+		width: '100%',
+	},
 	reactLogo: {
 		// height: 178,
 		// width: 290,
@@ -46,5 +51,7 @@ const styles = StyleSheet.create({
 	titleContainer: {
 		flexDirection: 'row',
 		gap: 8,
+		padding: 10,
+		backgroundColor: 'transparent'
 	},
 });

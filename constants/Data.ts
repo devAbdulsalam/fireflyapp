@@ -135,7 +135,7 @@ export const featuresData = [
 	},
 	{
 		id: 2,
-		icon: icons.info,
+		icon: icons.phone,
 		color: COLORS.purple,
 		backgroundColor: COLORS.lightRed,
 		description: 'Report',
